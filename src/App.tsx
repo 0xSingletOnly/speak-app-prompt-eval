@@ -23,8 +23,8 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
 
   const prompts = {
-    prompt1: "What did you do on the weekend?",
-    prompt2: "Weekends are a great time to relax or do something fun! Did you get up to anything interesting this past weekend? Perhaps you met friends, tried a new hobby, or just chilled at home?"
+    prompt1: "Prompt 1: What did you do on the weekend?",
+    prompt2: "Prompt 2: Weekends are a great time to relax or do something fun! Did you get up to anything interesting this past weekend? Perhaps you met friends, tried a new hobby, or just chilled at home?"
   };
 
   // Function to generate speech from text using ElevenLabs
@@ -163,14 +163,14 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-[#1c49ff] to-[#4169ff] bg-clip-text text-transparent">Prompt Evaluation App</h1>
-          <p className="mt-4 text-lg text-gray-600">Compare and analyze different prompt responses</p>
+    <div className="app-wrapper">
+      <div className="app-container">
+        <div className="app-header">
+          <h1 className="app-title">Speak.com Prompt Monitoring and Evaluation</h1>
+          <p className="app-subtitle">Compare and analyze different prompt responses to find the best prompts for learners.</p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+        <div className="prompt-grid">
           <PromptCard
             prompt={prompts.prompt1}
             promptAudio={prompt1Audio}

@@ -65,7 +65,7 @@ const ResultsDashboard: React.FC<ResultsDashboardProps> = ({ prompt1Results, pro
       <div className="dashboard-header">
         <div>
           <h2 className="dashboard-title">
-            <span>Evaluation</span> Results
+            <span>Evaluation Results</span> 
           </h2>
           <p className="dashboard-subtitle">Compare performance metrics between prompts</p>
         </div>

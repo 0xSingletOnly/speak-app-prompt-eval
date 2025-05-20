@@ -1,8 +1,25 @@
 /* Base styles */
+.app-wrapper {
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #f9fafb, white);
+  padding: 3rem 1rem;
+}
+
+@media (min-width: 640px) {
+  .app-wrapper {
+    padding: 3rem 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .app-wrapper {
+    padding: 3rem 2rem;
+  }
+}
+
 .app-container {
-  max-width: 1200px;
+  max-width: 72rem;
   margin: 0 auto;
-  padding: 2rem;
 }
 
 /* PromptCard styles */
@@ -58,8 +75,8 @@
 }
 
 .record-button {
-  width: 6rem;
-  height: 6rem;
+  width: 5rem;
+  height: 5rem;
 }
 
 .record-button.recording {
