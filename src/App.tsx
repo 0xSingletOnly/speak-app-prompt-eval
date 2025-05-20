@@ -162,11 +162,11 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 py-8 px-4">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold text-center mb-8">Prompt Evaluation App</h1>
+    <div className="min-h-screen bg-white py-12 px-6 w-full">
+      <div className="max-w-5xl mx-auto">
+        <h1 className="text-4xl font-bold text-center mb-12 text-[#1c49ff]">Prompt Evaluation App</h1>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
           <PromptCard
             prompt={prompts.prompt1}
             promptAudio={prompt1Audio}

@@ -63,21 +63,22 @@ const PromptCard: React.FC<PromptCardProps> = ({ prompt, promptAudio, isLoading,
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md">
-      <p className="text-lg mb-4">{prompt}</p>
+    <div className="bg-white p-8 rounded-xl border-2 border-gray-100 hover:border-[#1c49ff] transition-colors duration-200">
+      <h2 className="text-lg font-semibold text-[#1c49ff] mb-3">Prompt</h2>
+      <p className="text-lg mb-6 text-gray-700 leading-relaxed">{prompt}</p>
       <div className="flex justify-between items-center">
         <button
           onClick={playTTS}
           disabled={!promptAudio || isLoading}
-          className={`${!promptAudio || isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'} text-white p-2 rounded-full`}
+          className={`${!promptAudio || isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#1c49ff] hover:bg-[#0030e0]'} text-white p-3 rounded-full transition-colors duration-200`}
         >
           {isLoading ? '...' : isPlaying ? <FaStop /> : <FaPlay />}
         </button>
         <button
           onClick={isRecording ? stopRecording : startRecording}
           className={`${
-            isRecording ? 'bg-red-500 hover:bg-red-600' : 'bg-green-500 hover:bg-green-600'
-          } text-white p-4 rounded-full`}
+            isRecording ? 'bg-red-500 hover:bg-red-600' : 'bg-[#1c49ff] hover:bg-[#0030e0]'
+          } text-white p-4 rounded-full transition-colors duration-200`}
         >
           {isRecording ? <FaStop /> : <FaMicrophone />}
         </button>
