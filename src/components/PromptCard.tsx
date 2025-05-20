@@ -3,12 +3,16 @@ import { FaMicrophone, FaPlay, FaStop } from 'react-icons/fa';
 
 interface PromptCardProps {
   prompt: string;
+  promptAudio: string | null;
+  isLoading: boolean;
   onRecordingComplete: (audioBlob: Blob) => void;
 }
 
-const PromptCard: React.FC<PromptCardProps> = ({ prompt, onRecordingComplete }) => {
+const PromptCard: React.FC<PromptCardProps> = ({ prompt, promptAudio, isLoading, onRecordingComplete }) => {
   const [isRecording, setIsRecording] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(null);
+  const [audioElement, setAudioElement] = useState<HTMLAudioElement | null>(null);
 
   const startRecording = async () => {
     try {
@@ -40,8 +44,22 @@ const PromptCard: React.FC<PromptCardProps> = ({ prompt, onRecordingComplete }) 
   };
 
   const playTTS = async () => {
-    // TODO: Implement ElevenLabs TTS
-    console.log('Playing TTS for:', prompt);
+    if (!promptAudio) return;
+
+    if (!audioElement) {
+      const audio = new Audio(promptAudio);
+      audio.onended = () => setIsPlaying(false);
+      setAudioElement(audio);
+      audio.play();
+    } else {
+      if (isPlaying) {
+        audioElement.pause();
+        audioElement.currentTime = 0;
+      } else {
+        audioElement.play();
+      }
+    }
+    setIsPlaying(!isPlaying);
   };
 
   return (
@@ -50,9 +68,10 @@ const PromptCard: React.FC<PromptCardProps> = ({ prompt, onRecordingComplete }) 
       <div className="flex justify-between items-center">
         <button
           onClick={playTTS}
-          className="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600"
+          disabled={!promptAudio || isLoading}
+          className={`${!promptAudio || isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'} text-white p-2 rounded-full`}
         >
-          <FaPlay />
+          {isLoading ? '...' : isPlaying ? <FaStop /> : <FaPlay />}
         </button>
         <button
           onClick={isRecording ? stopRecording : startRecording}
