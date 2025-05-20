@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaMicrophone, FaPlay, FaStop } from 'react-icons/fa';
+import '../styles/main.css';
 
 interface PromptCardProps {
   prompt: string;
@@ -38,7 +39,6 @@ const PromptCard: React.FC<PromptCardProps> = ({ prompt, promptAudio, isLoading,
     if (mediaRecorder && isRecording) {
       mediaRecorder.stop();
       setIsRecording(false);
-      // Stop all tracks on the active stream
       mediaRecorder.stream.getTracks().forEach(track => track.stop());
     }
   };
@@ -63,25 +63,42 @@ const PromptCard: React.FC<PromptCardProps> = ({ prompt, promptAudio, isLoading,
   };
 
   return (
-    <div className="bg-white p-8 rounded-xl border-2 border-gray-100 hover:border-[#1c49ff] transition-colors duration-200">
-      <h2 className="text-lg font-semibold text-[#1c49ff] mb-3">Prompt</h2>
-      <p className="text-lg mb-6 text-gray-700 leading-relaxed">{prompt}</p>
-      <div className="flex justify-between items-center">
-        <button
-          onClick={playTTS}
-          disabled={!promptAudio || isLoading}
-          className={`${!promptAudio || isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#1c49ff] hover:bg-[#0030e0]'} text-white p-3 rounded-full transition-colors duration-200`}
-        >
-          {isLoading ? '...' : isPlaying ? <FaStop /> : <FaPlay />}
-        </button>
-        <button
-          onClick={isRecording ? stopRecording : startRecording}
-          className={`${
-            isRecording ? 'bg-red-500 hover:bg-red-600' : 'bg-[#1c49ff] hover:bg-[#0030e0]'
-          } text-white p-4 rounded-full transition-colors duration-200`}
-        >
-          {isRecording ? <FaStop /> : <FaMicrophone />}
-        </button>
+    <div className="prompt-card">
+      <div className="relative">
+        <h2 className="prompt-title">{prompt}</h2>
+
+        <div className="buttons-container">
+          {/* Play button section */}
+          {promptAudio && (
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <button
+                onClick={playTTS}
+                disabled={!promptAudio || isLoading}
+                className={`play-button ${!promptAudio || isLoading ? 'button-disabled' : ''}`}
+              >
+                {isLoading ? (
+                  <div className="loading-spinner"></div>
+                ) : isPlaying ? (
+                  <FaStop style={{ width: '1.25rem', height: '1.25rem' }} />
+                ) : (
+                  <FaPlay style={{ width: '1.25rem', height: '1.25rem' }} />
+                )}
+              </button>
+              <p className="button-label">Listen to prompt</p>
+            </div>
+          )}
+
+          {/* Microphone button section */}
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <button
+              onClick={isRecording ? stopRecording : startRecording}
+              className={`record-button ${isRecording ? 'recording' : ''}`}
+            >
+              {isRecording ? <FaStop className="w-6 h-6" /> : <FaMicrophone style={{ width: '2rem', height: '2rem', animation: isRecording ? 'pulse 2s infinite' : 'none' }} />}
+            </button>
+            <p className="button-label">{isRecording ? 'Stop recording' : 'Start recording'}</p>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import PromptCard from './components/PromptCard';
 import ResultsDashboard from './components/ResultsDashboard';
+import './styles/main.css';
 
 import { OpenAI } from "openai";
 const client = new OpenAI({
@@ -162,11 +163,14 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-white py-12 px-6 w-full">
-      <div className="max-w-5xl mx-auto">
-        <h1 className="text-4xl font-bold text-center mb-12 text-[#1c49ff]">Prompt Evaluation App</h1>
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-16">
+          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-[#1c49ff] to-[#4169ff] bg-clip-text text-transparent">Prompt Evaluation App</h1>
+          <p className="mt-4 text-lg text-gray-600">Compare and analyze different prompt responses</p>
+        </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
           <PromptCard
             prompt={prompts.prompt1}
             promptAudio={prompt1Audio}
